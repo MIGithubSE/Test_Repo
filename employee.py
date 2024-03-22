@@ -5,11 +5,6 @@ class Employee:
     raise_amt = 1.04
 
     def __init__(self, first, last, pay):
-        if not all(isinstance(param, str) for param in [first, last]):
-            raise ValueError("First and last names must be strings.")
-        if not isinstance(pay, (int, float)) or pay < 0:
-            raise ValueError("Pay must be a positive number.")
-
         self.first = first
         self.last = last
         self.pay = pay
@@ -27,21 +22,9 @@ class Employee:
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amt)
 
-    def evaluate_performance(self, rating):
-        if rating < 3:
-            feedback = "Needs Improvement"
-            potential_raise = 1.00  # No raise
-        elif 3 <= rating < 4:
-            feedback = "Meets Expectations"
-            potential_raise = 1.03  # 3% raise
-        else:
-            feedback = "Exceeds Expectations"
-            potential_raise = 1.06  # 6% raise
-
-        return {"feedback": feedback, "potential_raise": potential_raise}
-
     def __repr__(self):
         return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
+
 
 class Manager(Employee):
     """A sample Manager class"""
@@ -60,5 +43,3 @@ class Manager(Employee):
 
     def __repr__(self):
         return "Manager('{}', '{}', {}, {})".format(self.first, self.last, self.pay, self.employees)
-
-    
